@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>About Pulau Redang</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+
+<style>
+:root{
+  --bg:#e0f7fa; 
+  --card:#ffffff; 
+  --text:#0f172a; 
+  --muted:#475569; 
+  --accent:#00bcd4; 
+  --nav:#0f172a;
+}
+body.dark{
+  --bg:#0b1220; --card:#111827; --text:#e5e7eb; --muted:#94a3b8; --accent:#38bdf8; --nav:#020617;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{
+  font-family:"Poppins",sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  overflow-x:hidden;
+  transition:0.3s;
+  background:
+    url('images/islandbackground.jpg') no-repeat center center fixed;
+  background-size:cover;
+  overflow-x:hidden;
+}
+
+a{text-decoration:none;color:inherit;}
+
+/* ===== NAVBAR ===== */
+.navbar{
+  position:fixed; top:0; left:0; width:100%;
+  padding:14px 7%;
+  display:flex; align-items:center; justify-content:space-between;
+  background:var(--nav); color:#e5f4ff; z-index:100;
+}
+.brand{display:flex; align-items:center; gap:10px;}
+.brand-logo{
+  width:34px;height:34px;border-radius:50%;
+  background:#ffffff;   /* ⬅️ TUKAR NI SAHAJA */
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 12px rgba(0,0,0,0.4);
+  overflow:hidden;      /* ⬅️ TAMBAH */
+}
+.brand-logo img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+}
+.brand-text{font-size:13px;letter-spacing:2px;text-transform:uppercase;}
+.nav-links{
+  display:flex;align-items:center;gap:18px;font-size:12px;
+  text-transform:uppercase;letter-spacing:1px;
+}
+.nav-links a{color:#e5f4ff; position:relative; padding-bottom:2px;}
+.nav-links a::after{
+  content:""; position:absolute; left:0; bottom:0; width:0; height:2px;
+  background:var(--accent); transition:0.3s;
+}
+.nav-links a:hover::after{width:100%;}
+.nav-cta{
+  padding:7px 16px; border-radius:999px;
+  border:1px solid rgba(148,163,184,0.7);
+  color:#e5f4ff; font-size:11px; text-transform:uppercase; letter-spacing:1px;
+  background:linear-gradient(135deg,#38bdf8,#0ea5e9); cursor:pointer;
+  transition:0.25s;
+}
+.nav-cta:hover{transform:translateY(-1px); box-shadow:0 8px 20px rgba(56,189,248,0.7);}
+.nav-toggle{display:none; flex-direction:column; gap:4px; cursor:pointer;}
+.nav-toggle span{width:20px; height:2px; border-radius:999px; background:#e5f4ff;}
+@media(max-width:850px){
+  .nav-links{
+    position:fixed; right:7%; top:65px;
+    flex-direction:column; align-items:flex-end;
+    padding:14px 16px;
+    background:rgba(15,23,42,0.98);
+    border-radius:14px;
+    box-shadow:0 12px 30px rgba(0,0,0,0.6);
+    transform:translateY(-20px) scale(0.8);
+    opacity:0; pointer-events:none; transition:0.25s;
+  }
+  .nav-links.show{opacity:1; pointer-events:auto; transform:translateY(0) scale(1);}
+  .nav-cta{width:100%; text-align:center;}
+  .nav-toggle{display:flex;}
+}
+
+/* ===== HERO WITH WOW EFFECT ===== */
+.hero{
+  padding:120px 7% 20px; text-align:center; position:relative;
+  background:linear-gradient(135deg,#00bcd4,#008080);
+  color:white;
+}
+.hero h1{
+  font-family:"Playfair Display",serif;
+  font-size:clamp(2.5rem,4vw,3.5rem);
+  margin-bottom:12px;
+  color: white;
+  text-shadow: 2px 2px 8px rgba(0,0,0,0.4);
+  
+  /* Wow effect */
+  opacity: 0;
+  transform: scale(0.8) rotateX(20deg);
+  animation: wowEntrance 1.8s forwards;
+  animation-delay: 0.3s;
+}
+@keyframes wowEntrance {
+  0% {
+    opacity: 0;
+    transform: scale(0.8) rotateX(20deg);
+    letter-spacing: 0px;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.4);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1) rotateX(0deg);
+    letter-spacing: 4px;
+    text-shadow: 2px 2px 20px rgba(0,0,0,0.6);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotateX(0deg);
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 15px rgba(0,0,0,0.7);
+  }
+}
+.hero h1:hover {
+  text-shadow: 2px 2px 25px rgba(255,255,255,0.9);
+  transform: scale(1.05);
+  transition: all 0.4s ease;
+}
+.hero p{
+  font-size:16px; max-width:650px; margin:0 auto; color:white;
+  opacity: 0;
+  animation: fadeUp 1.5s forwards;
+  animation-delay: 1s;
+}
+@keyframes fadeUp{
+  0% {opacity:0; transform: translateY(20px);}
+  100% {opacity:1; transform: translateY(0);}
+}
+
+/* SEKATAN AYAT PENDEK */
+.separator{
+  text-align:center; margin:40px 7px; padding:14px 0;
+  background:linear-gradient(135deg,#00bcd4,#008080);
+  color:white; font-size:1.1rem; font-weight:600;
+  border-radius:16px;
+  box-shadow:0 12px 30px rgba(0,0,0,0.2);
+  font-style:italic;
+}
+
+/* ===== CREATIVE INFO BOXES ===== */
+.info-container{
+  display:flex; flex-wrap:wrap; gap:24px; margin:40px 7%; justify-content:center;
+}
+.info-box{
+  flex:1 1 260px; background:var(--card); border-radius:22px;
+  box-shadow:0 16px 40px rgba(0,0,0,0.15); overflow:hidden;
+  transition:0.4s; cursor:pointer; position:relative;
+}
+.info-box img{
+  width:100%; height:180px; object-fit:cover; transition:0.3s;
+}
+.info-box:hover img{transform:scale(1.05);}
+.info-box h3{
+  font-family:"Playfair Display",serif; margin:12px 16px 8px; color:#007c91; font-size:1.3rem;
+}
+.info-box p{
+  font-size:0.95rem; color:var(--muted); line-height:1.6; margin:0 16px 16px;
+  max-height:0; overflow:hidden; transition:max-height 0.4s ease;
+}
+.info-box.expanded p{max-height:200px;}
+.info-box.float:nth-child(odd){transform:translateY(-10px);}
+.info-box.float:nth-child(even){transform:translateY(10px);}
+.info-box:hover{transform:translateY(-5px) scale(1.05); box-shadow:0 24px 48px rgba(0,0,0,0.25);}
+
+/* ===== HOW TO REACH ===== */
+.how-to-reach{
+  display:flex; flex-wrap:wrap; align-items:center; justify-content:center;
+  gap:16px; background:linear-gradient(135deg,#00bcd4,#008080);
+  padding:20px; border-radius:22px; margin:40px 7%;
+  cursor:pointer;
+}
+.how-step{
+  flex:1 1 120px; background:rgba(255,255,255,0.1);
+  padding:12px; border-radius:16px; text-align:center;
+  color:white; font-weight:600; transition:0.3s; position:relative;
+}
+.how-step img{width:100%; border-radius:12px; margin-bottom:6px;}
+.how-step:hover{background:rgba(255,255,255,0.3); transform:scale(1.05);}
+.arrow{
+  font-size:2rem; color:white; font-weight:bold;
+  animation: bounce 1s infinite alternate;
+}
+@keyframes bounce{
+  0%{transform:translateY(0);}
+  100%{transform:translateY(-8px);}
+}
+@media(max-width:800px){
+  .how-to-reach{flex-direction:column;}
+  .arrow{display:none;}
+}
+
+/* ===== FAQ ===== */
+.faq-button{
+  position:fixed; top:200px; right:10px;
+  background:var(--accent); color:white;
+  padding:10px 16px; border-radius:999px; cursor:pointer;
+  box-shadow:0 10px 20px rgba(0,0,0,0.3);
+  transition:0.3s; z-index:200;
+}
+.faq-button:hover{transform:translateY(-2px) scale(1.05);}
+.faq-container{
+  position:fixed; top:80px; right:-350px;
+  width:320px; max-height:80vh;
+  background:var(--card); color:var(--text);
+  border-radius:18px; padding:20px;
+  box-shadow:0 22px 48px rgba(0,0,0,0.3);
+  transition:0.5s cubic-bezier(0.68,-0.55,0.265,1.55);
+  overflow-y:auto;
+  z-index:190;
+}
+.faq-container.show{right:20px;}
+.faq-item{margin-bottom:12px; border-bottom:1px solid rgba(0,0,0,0.1);}
+.faq-item:last-child{border:none;}
+.faq-question{
+  padding:10px 0; cursor:pointer; font-weight:600; display:flex; justify-content:space-between; align-items:center;
+  transition:0.3s;
+}
+.faq-answer{
+  max-height:0; overflow:hidden; transition:0.4s ease;
+  font-size:0.9rem; color:var(--muted);
+}
+.faq-answer.show{max-height:200px; margin-top:6px;}
+
+/* ===== BUBBLES ===== */
+#bubbles{position:fixed; inset:0; z-index:-1;}
+.bubble{position:absolute; border-radius:50%; background:rgba(0,188,212,0.2); animation:float linear infinite;}
+@keyframes float{
+  0%{transform:translateY(100vh) scale(0);opacity:0;}
+  50%{opacity:.5;}
+  100%{transform:translateY(-10vh) scale(1);opacity:0;}
+}
+
+/* FOOTER */
+footer{
+  text-align:center; font-size:11px; color:#e5e7eb;
+  padding:14px 7% 18px; background:var(--nav);
+  border-top:1px solid rgba(31,41,55,0.9);
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="brand">
+    <div class="brand-logo">
+      <img src="images/logo-redang.png" alt="Redang Ocean Life Logo">
+    </div>
+    <div class="brand-text">Redang Ocean Life</div>
+  </div>
+  <div class="nav-toggle" id="navToggle"><span></span><span></span><span></span></div>
+  <nav class="nav-links" id="navLinks">
+    <a href="index.html">Home</a>
+    <a href="about.html">About Redang</a>
+    <a href="attractions.html">Attractions</a>
+    <a href="accommodations.html">Accommodations</a>
+    <a href="packages.html">Packages</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="contact.html">Contact</a>
+    <button class="nav-cta" onclick="window.location.href='packages.html'">Book Now!</button>
+  </nav>
+</header>
+
+<section class="hero">
+  <h1>Welcome to Pulau Redang</h1>
+  <p>Experience pristine beaches, crystal-clear waters, and unforgettable marine life adventures.</p>
+</section>
+
+<section class="separator">
+  <p>Discover, Explore, and Dive into the Wonders of the Island</p>
+</section>
+
+<div class="info-container">
+  <div class="info-box float"><img src="images/redang-beach.jpg" alt="Redang Beach">
+    <h3>Island Overview</h3><p>Pulau Redang is famous for soft white sands, clear waters, and vibrant marine life.</p>
+  </div>
+  <div class="info-box float"><img src="images/redang-history.jpg" alt="Island History">
+    <h3>Island History</h3><p>Originally home to fishermen, now a protected marine park focusing on conservation.</p>
+  </div>
+  <div class="info-box float"><img src="images/best-time.jpg" alt="Best Time to Visit">
+    <h3>Best Time to Visit</h3><p>March–October is ideal. Bring sun protection and follow guidelines.</p>
+  </div>
+</div>
+
+<!-- ===== HOW TO REACH UPDATED ===== -->
+<div class="how-to-reach" id="howBox">
+  <div class="how-step"><p>How to Reach ?</p></div>
+  <div class="arrow">→</div>
+  <div class="how-step"><img src="images/kuala-terengganu.png" alt="Drive to Kuala Terengganu"><p>Drive to Kuala Terengganu</p></div>
+  <div class="arrow">→</div>
+  <div class="how-step"><img src="images/merang-jetty.png" alt="Take Ferry at Merang Jetty"><p>Take Ferry at Merang Jetty</p></div>
+  <div class="arrow">→</div>
+  <div class="how-step"><img src="images/pulau-redang.png" alt="Arrive at Pulau Redang"><p>Arrive at Pulau Redang</p></div>
+</div>
+
+<button class="faq-button" id="faqBtn">❓ FAQ</button>
+<div class="faq-container" id="faqContainer">
+  <div class="faq-item"><div class="faq-question">1. Do you think Pulau Redang is family-friendly?<span>+</span></div><div class="faq-answer">Yes, calm beaches and snorkeling for all ages.</div></div>
+  <div class="faq-item"><div class="faq-question">2. Can I bring food?<span>+</span></div><div class="faq-answer">Some accommodations allow, but restaurants are available. Minimize plastic usage.</div></div>
+  <div class="faq-item"><div class="faq-question">3. Are there medical facilities?<span>+</span></div><div class="faq-answer">Yes, minor clinic available; serious cases may need evacuation.</div></div>
+  <div class="faq-item"><div class="faq-question">4. How about Wi-Fi?<span>+</span></div><div class="faq-answer">Limited; many visitors disconnect to enjoy nature.</div></div>
+  <div class="faq-item"><div class="faq-question">5. Can I rent snorkeling gear?<span>+</span></div><div class="faq-answer">Yes, resorts and shops offer rentals at reasonable rates.</div></div>
+  <div class="faq-item"><div class="faq-question">6. Are pets allowed?<span>+</span></div><div class="faq-answer">Pets are generally not allowed in resorts to protect wildlife.</div></div>
+  <div class="faq-item"><div class="faq-question">7. Is there a conservation fee?<span>+</span></div><div class="faq-answer">Yes, a small fee is charged to support marine conservation.</div></div>
+  <div class="faq-item"><div class="faq-question">8. What safety measures are in place?<span>+</span></div><div class="faq-answer">Lifeguards at main beaches, clear signage, and emergency protocols.</div></div>
+  <div class="faq-item"><div class="faq-question">9. May i know, are there guided tours available?<span>+</span></div><div class="faq-answer">Yes, multiple operators provide snorkeling and island tours.</div></div>
+  <div class="faq-item"><div class="faq-question">10. Can I book online?<span>+</span></div><div class="faq-answer">Yes, resorts and ferries allow online booking for convenience. So, let's contact us! </div></div>
+</div>
+
+<div id="bubbles"></div>
+
+<footer>
+    © 2025 REDANG OCEAN LIFE | Concept website about Pulau Redang for educational purposes
+    <br>
+    - Access Anywhere -
+  </footer>
+
+<script>
+/* NAV TOGGLE */
+const navToggle=document.getElementById("navToggle");
+const navLinks=document.getElementById("navLinks");
+navToggle.addEventListener("click",()=>navLinks.classList.toggle("show"));
+
+/* BUBBLES */
+const bubbleBox=document.getElementById('bubbles');
+for(let i=0;i<60;i++){
+  const b=document.createElement('div');
+  b.className='bubble';
+  const s=Math.random()*18+8;
+  b.style.width=b.style.height=s+'px';
+  b.style.left=Math.random()*100+'vw';
+  b.style.animationDuration=Math.random()*6+4+'s';
+  bubbleBox.appendChild(b);
+}
+
+/* FAQ TOGGLE */
+const faqBtn=document.getElementById("faqBtn");
+const faqContainer=document.getElementById("faqContainer");
+faqBtn.addEventListener("click",()=>faqContainer.classList.toggle("show"));
+
+const faqItems=document.querySelectorAll(".faq-item");
+faqItems.forEach(item=>{
+  const q=item.querySelector(".faq-question");
+  const icon = q.querySelector("span");
+  q.addEventListener("click",()=>{
+    const a=item.querySelector(".faq-answer");
+    const allAnswers=document.querySelectorAll(".faq-answer");
+    const allIcons=document.querySelectorAll(".faq-question span");
+    allAnswers.forEach(ans=>{if(ans!==a) ans.classList.remove("show");});
+    allIcons.forEach(ic=>{if(ic!==icon) ic.textContent="+";});
+    a.classList.toggle("show");
+    icon.textContent = a.classList.contains("show") ? "−" : "+";
+  });
+});
+
+/* CLICK INFO BOX TO EXPAND */
+const boxes = document.querySelectorAll('.info-box');
+boxes.forEach(box=>{
+  box.addEventListener('click',()=>{
+    boxes.forEach(b=>{if(b!==box) b.classList.remove('expanded');});
+    box.classList.toggle('expanded');
+  });
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Packages | Redang Ocean Life</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{
+  font-family:"Poppins",sans-serif;
+  background: url('images/new_bg.jpg') no-repeat center center fixed;
+  background-size: cover;
+  color:#fff;
+  display:flex;
+  flex-direction:column;
+  min-height:100vh;
+  position:relative;
+}
+
+/* NAVBAR */
+.navbar{
+  position:fixed; top:0; left:0; width:100%; padding:10px 7%;
+  display:flex; justify-content:space-between; align-items:center;
+  background:#0f172a;
+  color:#e5f4ff; z-index:100;
+}
+.brand{display:flex;align-items:center;gap:8px;}
+.brand-logo{
+  width:34px;height:34px;border-radius:50%;
+  background:#ffffff;   /* ⬅️ TUKAR NI SAHAJA */
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 12px rgba(0,0,0,0.4);
+  overflow:hidden;      /* ⬅️ TAMBAH */
+}
+.brand-logo img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+}
+.brand-text{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;}
+.nav-links{display:flex;align-items:center;gap:14px;font-size:11px;text-transform:uppercase;letter-spacing:0.8px;}
+.nav-links a{color:#e5f4ff; text-decoration:none; padding:0;}
+.nav-cta{padding:5px 12px;border-radius:999px;font-size:10px;text-transform:uppercase;background:linear-gradient(135deg,#38bdf8,#0ea5e9);color:#fff;}
+.nav-toggle{display:none;flex-direction:column;gap:3px;cursor:pointer;}
+.nav-toggle span{width:16px;height:2px;background:#e5f4ff;}
+@media(max-width:850px){
+  .nav-links{position:fixed;right:7%;top:55px;flex-direction:column;align-items:flex-end;
+    background:#0f172a;padding:12px 14px;border-radius:14px;opacity:0; pointer-events:none; transform:scale(.95); transition:.3s;}
+  .nav-links.show{opacity:1; pointer-events:auto; transform:scale(1);}
+  .nav-toggle{display:flex}
+}
+
+/* MAIN */
+main{
+  padding:100px 7% 40px; 
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+.main-title{
+  font-family: 'Playfair Display', serif;
+  font-size:4.5rem; 
+  text-align: center;
+  letter-spacing: 2px;
+  margin-bottom:15px;
+  background: linear-gradient(90deg,#ff5722,#00e5ff,#ffeb3b,#ff4081);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: neonGlow 2s ease-in-out infinite alternate;
+  text-transform: uppercase;
+}
+@keyframes neonGlow {
+  0%{filter: drop-shadow(0 0 6px #ff5722) drop-shadow(0 0 12px #00e5ff);}
+  50%{filter: drop-shadow(0 0 12px #ffeb3b) drop-shadow(0 0 20px #ff4081);}
+  100%{filter: drop-shadow(0 0 6px #ff5722) drop-shadow(0 0 12px #00e5ff);}
+}
+.intro-text{
+  text-align:center;
+  color:#fff;
+  opacity:0.9;
+  margin-bottom:40px;
+  font-size:14px;
+  text-shadow:1px 1px 4px #000;
+}
+
+/* PACKAGE CARDS SMALLER */
+.package-container{
+  display:flex;
+  flex-direction: column;
+  gap:20px; 
+  width:100%;
+  max-width:1000px;
+}
+.package-card{
+  display:flex;
+  flex-direction: row;
+  align-items: flex-start;
+  background: rgba(255,255,255,0.15);
+  border-radius:12px;  
+  padding:12px;         
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border:1px solid rgba(255,255,255,0.25);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25); 
+  transition: transform 0.4s ease, box-shadow 0.4s ease, opacity 0.6s ease;
+  opacity: 0;
+  transform: translateY(25px) scale(0.95);
+}
+.package-card.show{
+  opacity:1;
+  transform: translateY(0) scale(1);
+}
+.package-card:hover{
+  transform: translateY(-8px) scale(1.05) rotate(-0.3deg);
+  box-shadow:0 14px 30px rgba(0,0,0,0.45), 0 0 18px #ff5722;
+}
+
+.package-card:nth-child(even){
+  margin-left:15px;   
+}
+.package-card:nth-child(2n+1){
+  margin-right:15px;  
+}
+
+.package-content{
+  flex:1;
+  padding:0 8px;
+}
+.package-icon{
+  font-size:1.8rem;   
+  margin:0 8px;    
+  min-width:40px;   
+  text-align:center;
+  display:inline-block;
+  animation: floatIcon 3s ease-in-out infinite;
+}
+@keyframes floatIcon {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+/* CARD TEXT */
+.package-card h3{
+  font-family:'Playfair Display', serif;
+  color:#ffeb3b;  /* Tajuk package jadi KUNING */
+  margin-bottom:4px;
+  font-size:1.3rem;
+  text-shadow: 1px 1px 4px #000;
+}
+.package-card p, .package-card ul, .package-card .package-price{
+  font-size:0.9rem;  
+  margin-bottom:3px;
+  color:#fff;
+}
+.package-card ul li strong{
+  color:#ff5722;  /* Oren highlight untuk strong text */
+}
+.package-price{
+  font-size:0.95rem;
+  gap:6px;
+}
+
+/* FOOTER */
+footer{
+  background:#0f172a;
+  padding:8px 7%;
+  flex-shrink:0;
+  text-align:center;
+  font-size:10px;
+}
+footer p{
+  color:#fff;
+}
+
+/* WHATSAPP BUTTONS SMALLER */
+#whatsappLeft, #whatsappRight{
+  position:fixed;
+  top:50%;
+  transform:translateY(-50%);
+  background:#25d366;
+  color:white;
+  padding:14px 18px; 
+  border-radius:50px;
+  font-weight:600;
+  cursor:pointer;
+  box-shadow:0 4px 15px rgba(0,0,0,0.4);
+  text-align:center;
+  z-index:500;
+  font-size:18px; 
+}
+#whatsappLeft::before, #whatsappRight::before{
+  content:"📲";
+  margin-right:6px;
+}
+#whatsappLeft{left:8px;}
+#whatsappRight{right:8px;}
+#whatsappLeft:hover, #whatsappRight:hover{background:#1ebe5d;}
+
+/* POPUP NAMES */
+#wsPopup{
+  position:fixed;
+  top:50%; left:50%;
+  transform:translate(-50%,-50%);
+  background:rgba(15,23,42,0.95);
+  color:white;
+  padding:16px 24px;
+  border-radius:16px;
+  box-shadow:0 18px 35px rgba(0,0,0,0.5);
+  display:none;
+  z-index:600;
+  min-width:240px;
+  text-align:center;
+}
+#wsPopup h3{margin-bottom:10px; font-size:1rem;}
+.ws-name{
+  padding:8px 12px;
+  margin:6px 0;
+  background:#25d366;
+  border-radius:10px;
+  cursor:pointer;
+  transition:0.3s;
+  font-size:0.85rem;
+}
+.ws-name:hover{background:#1ebe5d;}
+#wsPopup #closePopup{
+  margin-top:10px;
+  cursor:pointer;
+  font-weight:bold;
+  color:#ff5722;
+  font-size:0.9rem;
+}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .package-card{flex-direction:column; padding:8px;}
+  .package-card:nth-child(even), .package-card:nth-child(2n+1){
+    margin:0;
+  }
+  .package-icon{margin:8px 0;}
+  .main-title{font-size:3.5rem;}
+  .intro-text{font-size:13px;}
+}
+</style>
+</head>
+
+<body>
+<header class="navbar">
+  <div class="brand">
+    <div class="brand-logo">
+      <img src="images/logo-redang.png" alt="Redang Ocean Life Logo">
+    </div>
+    <div class="brand-text">Redang Ocean Life</div>
+  </div>
+  <div class="nav-toggle" id="navToggle"><span></span><span></span><span></span></div>
+  <nav class="nav-links" id="navLinks">
+    <a href="index.html">Home</a>
+    <a href="about.html">About Redang</a>
+    <a href="attractions.html">Attractions</a>
+    <a href="accommodations.html">Accommodations</a>
+    <a href="packages.html" class="active">Packages</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="contact.html">Contact</a>
+    <button class="nav-cta" onclick="location.href='packages.html'">Book Now!</button>
+  </nav>
+</header>
+
+<main>
+  <h1 class="main-title">REDANG PACKAGES</h1>
+  <p class="intro-text">Explore our curated packages and make your island trip unforgettable.</p>
+
+  <div class="package-container">
+
+    <!-- Daytrip -->
+    <div class="package-card">
+      <div class="package-icon">🛥️</div>
+      <div class="package-content">
+        <h3>Daytrip Package</h3>
+        <p>Ideal for visitors wanting a quick island experience.</p>
+        <p><strong>Includes:</strong></p>
+        <ul>
+          <li>Return boat <strong>transport</strong></li>
+          <li>Guided <strong>snorkeling trips</strong></li>
+          <li>Lunch and refreshments</li>
+          <li>Beach & nature exploration</li>
+        </ul>
+        <p class="package-price">RM 80 – RM 90 per person</p>
+      </div>
+    </div>
+
+    <!-- Honeymoon -->
+    <div class="package-card">
+      <div class="package-icon">💖</div>
+      <div class="package-content">
+        <h3>Honeymoon Package</h3>
+        <p>Designed for couples seeking a romantic getaway.</p>
+        <p><strong>Includes:</strong></p>
+        <ul>
+          <li>Beachfront/<strong>sea-view accommodation</strong></li>
+          <li>Special <strong>room decorations</strong></li>
+          <li>Romantic <strong>candlelight dinner</strong></li>
+          <li>Feeding <strong> Turtle/ Baby Shark</strong></li>
+          <li>Meals & <strong>snorkeling activities</strong></li>
+        </ul>
+        <p class="package-price">RM 200 – RM 500 per couple</p>
+      </div>
+    </div>
+
+    <!-- Family -->
+    <div class="package-card">
+      <div class="package-icon">👨‍👩‍👧‍👦</div>
+      <div class="package-content">
+        <h3>Family Package</h3>
+        <p>Suitable for families with children.</p>
+        <p><strong>Includes:</strong></p>
+        <ul>
+          <li><strong>Family/shared rooms</strong></li>
+          <li>Meals for <strong>adults & children</strong></li>
+          <li>Snorkeling & <strong>beach activities</strong></li>
+          <li>Feeding <strong> Turtle/ Baby Shark</strong></li>
+          <li>Beach & nature exploration</li>
+          <li>Safe, <strong>family-friendly facilities</strong></li>
+        </ul>
+        <p class="package-price"><span>Adult: RM 250 – RM 500</span> | <span>Child: RM 150 – RM 300</span></p>
+      </div>
+    </div>
+
+    <!-- Student & Budget -->
+    <div class="package-card">
+      <div class="package-icon">🎓</div>
+      <div class="package-content">
+        <h3>Student & Budget Package</h3>
+        <p>Perfect for students and budget travelers.</p>
+        <p><strong>Includes:</strong></p>
+        <ul>
+          <li>Budget/Mid-Range <strong>accommodation</strong></li>
+          <li>Feeding Turtle</li>
+          <li>Basic <strong>snorkeling trips</strong></li>
+          <li>Group-based activities</li>
+        </ul>
+        <p class="package-price">RM 110 – RM 130 per person</p>
+      </div>
+    </div>
+
+    <!-- Fisherman Activities -->
+    <div class="package-card">
+      <div class="package-icon">🎣</div>
+      <div class="package-content">
+        <h3>LIMITED! | Fisherman Activities Package</h3>
+        <p>Experience traditional fishing and squid catching like a local fisherman.</p>
+        <p><strong>Includes:</strong></p>
+        <ul>
+          <li><strong>Memancing</strong> (Fishing)</li>
+          <li><strong>Mencandat Sotong</strong> (Squid Catching)</li>
+          <li>Boat trip with local guidance</li>
+          <li>Bring your own fishing rod</li>
+        </ul>
+        <p class="package-price">RM 99 – RM 150 per person</p>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<!-- Floating WhatsApp Buttons -->
+<div id="whatsappLeft"> &lt; Booking Now!! &gt; </div>
+<div id="whatsappRight"> &lt; Booking Now!! &gt; </div>
+
+<!-- WhatsApp Popup -->
+<div id="wsPopup">
+  <h3>WE WILL HELP YOU IMMEDIATELY ! !</h3>
+  <div class="ws-name" data-number="601137466085"> MS. FAJRIYAH </div>
+  <div class="ws-name" data-number="60195209700"> MR. AMIER </div>
+  <div class="ws-name" data-number="601161093520"> MS. NAB </div>
+  <div class="ws-name" data-number="60139643437"> MR. KIMI </div>
+  <div id="closePopup">✖ Close</div>
+</div>
+
+<footer>
+    © 2025 REDANG OCEAN LIFE | Concept website about Pulau Redang for educational purposes
+    <br>
+    - Access Anywhere -
+  </footer>
+
+<script>
+/* NAV TOGGLE */
+const navToggle=document.getElementById("navToggle");
+const navLinks=document.getElementById("navLinks");
+navToggle.onclick = ()=>navLinks.classList.toggle("show");
+
+/* WHATSAPP POPUP */
+const wsLeft = document.getElementById("whatsappLeft");
+const wsRight = document.getElementById("whatsappRight");
+const wsPopup = document.getElementById("wsPopup");
+const closePopup = document.getElementById("closePopup");
+
+wsLeft.onclick = ()=> wsPopup.style.display = "block";
+wsRight.onclick = ()=> wsPopup.style.display = "block";
+closePopup.onclick = ()=> wsPopup.style.display = "none";
+
+/* CLICK NAMES TO OPEN WS */
+const wsNames = document.querySelectorAll(".ws-name");
+wsNames.forEach(name=>{
+  name.onclick = ()=>{
+    const number = name.dataset.number;
+    const message = encodeURIComponent("Hai. Saya berminat dengan REDANG OCEAN LIFE 🌊");
+    window.open(`https://wa.me/${number}?text=${message}`, "_blank");
+  };
+});
+
+/* SCROLL STAGGERED ANIMATION */
+const packageCards = document.querySelectorAll(".package-card");
+function checkCards() {
+  const triggerBottom = window.innerHeight * 0.85;
+  packageCards.forEach((card, index) => {
+    const cardTop = card.getBoundingClientRect().top;
+    if (cardTop < triggerBottom) {
+      setTimeout(() => {
+        card.classList.add("show");
+      }, index * 150);
+    }
+  });
+}
+window.addEventListener('scroll', checkCards);
+window.addEventListener('load', checkCards);
+</script>
+</body>
+</html>

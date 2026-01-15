@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Accommodations - REDANG OCEAN LIFE</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+<style>
+* {box-sizing:border-box; margin:0; padding:0;}
+body {
+  font-family:"Poppins",sans-serif;
+  color:#0f172a;
+  overflow-x:hidden;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  background:#000;
+}
+
+/* NAVBAR */
+.navbar {
+  position: fixed; top:0; left:0; width:100%;
+  padding:14px 7%; z-index:100;
+  display:flex; justify-content:space-between; align-items:center;
+  background: rgba(15,23,42,0.95);
+  backdrop-filter: blur(14px);
+}
+.brand {display:flex; align-items:center; gap:10px; color:#e5f4ff;}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Jarak antara logo & teks */
+}
+
+.brand-logo {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #fef9c3, #38bdf8); /* gradient baru */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4); /* shadow supaya nampak timbul */
+  overflow: hidden; /* pastikan gambar logo tak keluar */
+}
+
+.brand-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.brand-text {
+  font-size: 13px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #e5f4ff; /* pastikan senada dengan navbar */
+}
+
+.nav-links {
+  display: flex;
+  gap: 18px;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.nav-links a {
+  color: #e5f4ff;
+  position: relative;
+  padding-bottom: 2px;
+  outline: none;
+}
+.nav-links a::after{
+  content:""; 
+  position:absolute; 
+  left:50%; bottom:0; 
+  width:0; height:2px; 
+  background:#38bdf8; 
+  transition:0.3s;
+  transform:translateX(-50%);
+}
+.nav-links a:hover::after{width:100%;}
+.nav-links a.active::after{width:100%;}
+
+/* CTA button */
+.nav-cta{
+  padding:7px 16px; border-radius:999px;
+  color:#e5f4ff; font-size:11px;text-transform:uppercase; letter-spacing:1px; 
+  background: linear-gradient(135deg,#38bdf8,#0ea5e9); cursor:pointer; transition:0.25s; outline:none;
+}
+.nav-cta:hover{transform:translateY(-1px); box-shadow:0 8px 20px rgba(56,189,248,0.7);}
+.nav-toggle{display:none; flex-direction:column; gap:4px; cursor:pointer;}
+.nav-toggle span{width:20px; height:2px; border-radius:999px; background:#e5f4ff;}
+@media(max-width:850px){
+  .nav-links{
+    position:fixed; right:7%; top:65px; flex-direction:column; align-items:flex-end;
+    padding:14px 16px; background:rgba(15,23,42,0.98); border-radius:14px;
+    box-shadow:0 12px 30px rgba(0,0,0,0.6); transform:translateY(-20px) scale(0.8);
+    opacity:0; pointer-events:none; transition:0.25s;
+  }
+  .nav-links.show{opacity:1; pointer-events:auto; transform:translateY(0) scale(1);}
+  .nav-cta{width:100%; text-align:center;}
+  .nav-toggle{display:flex;}
+}
+
+/* MAIN CONTENT */
+main {
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:flex-start;
+  padding-top:120px;
+  position: relative;
+  z-index:1;
+}
+
+/* VIDEO BACKGROUND */
+#video-bg{
+  position:fixed;
+  top:0; left:0; width:100%; height:100%;
+  object-fit:cover;
+  z-index:0;
+  opacity:0.6;
+}
+
+/* BUDGET SELECTION */
+.budget-section{
+  display:flex; justify-content:center; align-items:center; flex-direction:column;
+  min-height:60vh;
+  width:100%;
+  z-index:1;
+  position:relative;
+}
+.budget-section h2{
+  font-family:'Dancing Script', cursive;
+  font-size:3rem; 
+  color:#fff;
+  text-shadow: 2px 2px 6px rgba(0,0,0,0.7);
+  margin-bottom:30px;
+}
+.budget-btn{
+  padding:16px 28px; margin:12px;
+  border-radius:12px; background:#ffffff80; border:2px solid #38bdf8;
+  color:#0f172a; font-size:1rem; cursor:pointer; font-weight:600; outline:none;
+  transition:0.3s;
+}
+.budget-btn:hover{background:#38bdf850; transform:scale(1.05);}
+
+/* ACCOMMODATION LIST */
+.accommodation-section{display:none; width:100%; padding:40px 7%; z-index:1; position:relative;}
+.accommodation-container{
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px;
+  justify-items:center;
+}
+.accommodation-card{
+  background:#e0f7fa; border-radius:16px; overflow:hidden;
+  box-shadow:0 6px 18px rgba(0,0,0,0.12);
+  transition: transform 0.3s, box-shadow 0.3s;
+  width:100%;
+  max-width:320px;
+  cursor:pointer;
+}
+.accommodation-card:hover{transform:translateY(-4px); box-shadow:0 12px 28px rgba(0,0,0,0.2);}
+.accommodation-card img{width:100%; height:180px; object-fit:cover; transition: transform 0.3s;}
+.accommodation-card img:hover{transform:scale(1.1);}
+.accommodation-card-content{padding:16px; display:flex; flex-direction:column;}
+.accommodation-card h3{font-family:"Playfair Display", serif; font-size:1.2rem; color:#007c91; margin-bottom:8px;}
+.accommodation-card p, .accommodation-card ul{font-size:0.95rem; color:#475569; margin-bottom:6px;}
+
+/* Back button */
+.back-btn{
+  margin-top:30px; padding:10px 20px;
+  border-radius:999px; border:2px solid #38bdf8;
+  background:#ffffff80; color:#0f172a; cursor:pointer; transition:0.3s;
+  outline:none;
+}
+.back-btn:hover{background:#38bdf850;}
+
+/* FOOTER */
+footer {
+  text-align:center; font-size:11px; color:#e5e7eb;
+  padding:14px 7% 18px;
+  background:#0f172a;
+  border-top:none;
+}
+
+/* LIGHTBOX EFFECT */
+.lightbox {
+  display:none; position:fixed; top:0; left:0; width:100%; height:100%;
+  background:rgba(0,0,0,0.85); justify-content:center; align-items:center; z-index:100;
+}
+.lightbox img{max-width:90%; max-height:80%; border-radius:16px;}
+</style>
+</head>
+<body>
+
+<!-- Video Background -->
+<video id="video-bg" autoplay muted loop>
+  <source src="videos/redang_beach.mp4" type="video/mp4">
+</video>
+
+<body>
+<header class="navbar">
+  <div class="brand">
+    <div class="brand-logo">
+      <img src="images/logo-redang.png" alt="Redang Ocean Life Logo">
+    </div>
+    <div class="brand-text">Redang Ocean Life</div>
+  </div>
+  <div class="nav-toggle" id="navToggle"><span></span><span></span><span></span></div>
+  <nav class="nav-links" id="navLinks">
+    <a href="index.html">Home</a>
+    <a href="about.html">About Redang</a>
+    <a href="attractions.html">Attractions</a>
+    <a href="accommodations.html">Accommodations</a>
+    <a href="packages.html" class="active">Packages</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="contact.html">Contact</a>
+    <button class="nav-cta" onclick="location.href='packages.html'">Book Now!</button>
+  </nav>
+</header>
+
+<main>
+  <section class="budget-section" id="budgetSection">
+    <h2>Your Comfort, Our Priority</h2>
+    <div>
+      <button class="budget-btn" data-range="budget">Budget : RM80–RM100</button>
+      <button class="budget-btn" data-range="mid">Mid-Range : RM101–RM200</button>
+      <button class="budget-btn" data-range="luxury">Luxury : RM201–RM350</button>
+    </div>
+  </section>
+
+  <section class="accommodation-section" id="accommodationSection">
+    <div class="accommodation-container" id="accommodationContainer"></div>
+    <button class="back-btn" id="backBtn">← Back</button>
+  </section>
+</main>
+
+<footer>
+    © 2025 REDANG OCEAN LIFE | Concept website about Pulau Redang for educational purposes
+    <br>
+    - Access Anywhere -
+  </footer>
+
+<div class="lightbox" id="lightbox"><img src="" alt="Resort Image"></div>
+
+<script>
+// Navbar toggle
+const navToggle = document.getElementById("navToggle");
+const navLinks = document.getElementById("navLinks");
+navToggle.addEventListener("click",()=>navLinks.classList.toggle("show"));
+
+// Set active link
+const currentLocation = location.href;
+const navItems = document.querySelectorAll('.nav-links a');
+navItems.forEach(link=>{
+  if(link.href === currentLocation){ link.classList.add('active'); }
+});
+
+// Budget buttons & accommodations
+const budgetSection = document.getElementById('budgetSection');
+const accommodationSection = document.getElementById('accommodationSection');
+const accommodationContainer = document.getElementById('accommodationContainer');
+const backBtn = document.getElementById('backBtn');
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = lightbox.querySelector('img');
+
+const accommodations = {
+  budget:[
+    {name:"Ceria Budget Chalet", img:"images/ceria_chalet.jpg", price:"RM80", package:"Queen Bed", facility:"Fan, Television , Private Bathroom", phone:"012-3456789"},
+    {name:"Harmony Budget Chalet", img:"images/harmony_chalet.jpg", price:"RM90", package:"Queen Bed", facility:"Fan, Television, Private Bathroom", phone:"012-9876543"},
+    {name:"Sunrise Chalet", img:"images/sunrise_chalet.jpg", price:"RM100", package:"1 Queen Bed, 1 Single Bed", facility:"Fan, Television, Private Bathroom", phone:"012-1122334"}
+  ],
+  mid:[
+    {name:"Redang Bay Resort", img:"images/redang_bay.jpg", price:"RM150", package:"1 Queen Bed, 1 Single Bed", facility:"AC, Fan, Wi-Fi, Television, Private Bathroom", phone:"013-1234567"},
+    {name:"Coral View Resort", img:"images/coral_view.jpg", price:"RM180", package:"1 Queen Bed, 1 Single Bed", facility:"AC, Fan, Wi-Fi, Television, Swimming Pool, Private Bathroom", phone:"013-7654321"},
+    {name:"Blue Lagoon Resort", img:"images/blue_lagoon.jpg", price:"RM200", package:"Double Queen Bed", facility:"AC, Fan, Wi-Fi, Television, Swimming Pool, Private Bathroom", phone:"013-5566778"}
+  ],
+  luxury:[
+    {name:"Taaras Beach & Spa Resort", img:"images/taaras_beach.jpg", price:"RM250", package:"All Inclusive", facility:"AC, Fan, Wi-Fi, Television, Swimming Pool, Spa, Cafe, Private Bathroom", phone:"014-2233445"},
+    {name:"The Redang Island Resort", img:"images/redang_island.jpg", price:"RM280", package:"All Inclusive", facility:"AC, Fan, Wi-Fi, Television, Swimming Pool, Spa, Cafe, Private Bathtub, Private Bathroom", phone:"014-3344556"},
+    {name:"Summer Bay Resort", img:"images/summer_bay.jpg", price:"RM300", package:"All Inclusive", facility:"AC, Fan, Wi-Fi, Television, Swimming Pool, Spa, Cafe, Private Bathtub, Private Bathroom", phone:"014-4455667"}
+  ]
+};
+
+document.querySelectorAll('.budget-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const range = btn.dataset.range;
+    accommodationContainer.innerHTML='';
+    accommodations[range].forEach((acc)=>{
+      const card=document.createElement('div');
+      card.className='accommodation-card';
+      card.innerHTML=`
+        <img src="${acc.img}" alt="${acc.name}">
+        <div class="accommodation-card-content">
+          <h3>${acc.name}</h3>
+          <p>Price: ${acc.price}</p>
+          <p>Package: ${acc.package}</p>
+          <p>Facility: ${acc.facility}</p>
+          <p>Phone: ${acc.phone}</p>
+        </div>
+      `;
+      accommodationContainer.appendChild(card);
+
+      const img = card.querySelector('img');
+      img.addEventListener('click',()=>{lightbox.style.display='flex'; lightboxImg.src=acc.img;});
+    });
+    budgetSection.style.display='none';
+    accommodationSection.style.display='block';
+  });
+});
+
+backBtn.addEventListener('click',()=>{accommodationSection.style.display='none'; budgetSection.style.display='flex';});
+lightbox.addEventListener('click',()=>lightbox.style.display='none');
+</script>
+
+</body>
+</html>
